@@ -1,0 +1,114 @@
+import java.net.SocketOption;
+import java.util.Scanner;
+class Gora{
+    String name,cord;
+    double square;
+}
+public class SoldCar {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in, "cp1251");
+        System.out.println("Введите количество гор=> ");
+        int n = sc.nextInt(); // количество стран
+        Gora countr[] = new Gora[n];
+        System.out.println("Введите информацию о странах: ");
+        for (int i = 0; i < countr.length; i++) {
+            sc.nextLine(); // очистка буфера
+            countr[i] = new Gora();
+            System.out.print("Название " + (i + 1) + "-й горы => ");
+            countr[i].name = sc.nextLine();
+            System.out.print("Место расположения " + (i + 1) + "-й горы => ");
+            countr[i].cord = sc.nextLine();
+            System.out.print("Высота " + (i + 1) + "-й горы => ");
+            countr[i].square = sc.nextDouble();
+
+        }
+        sc.nextLine();
+        System.out.println("\nХарактеристики гор:");
+        for (int i = 0; i < countr.length; i++) {
+            System.out.println("" + countr[i].name + "\t" + countr[i].cord + "\t" + countr[i].square
+                    + "м");
+        }
+        int nommax = 0; // номер элемента для страны с максимальной
+        // площадью (начальное значение)
+        double max = countr[nommax].square;
+        for (int i = 0; i < countr.length; i++)
+            if (countr[i].square > max) {
+                max = countr[i].square;
+                nommax = i;
+            }
+        System.out.println("\nСамая высокая гора :");
+        System.out.println("" + countr[nommax].name + "\t" + countr[nommax].cord + "\t" + countr[nommax].square
+                + "м");
+        for (int i = 0; i < countr.length - 1; i++)
+            for (int j = 0; j < countr.length - 1 - i; j++)
+                if (countr[j].square > countr[j + 1].square) {
+                    Gora rab = countr[j]; // rab – рабочая переменная для перестановки
+                    countr[j] = countr[j + 1];
+                    countr[j + 1] = rab;
+                }
+        double s = 1000; // суммарная площадь
+        for (int i = 0; i < countr.length; i++) ;
+        double sr = s;
+        System.out.println("\nГоры с высотой больше 1000 м");
+        for (int i = 0; i < countr.length; i++) {
+            if (countr[i].square > sr)
+                System.out.println("" + countr[i].name + "\t" + countr[i].cord + "\t" + countr[i].square
+                        + "м");
+        }
+        System.out.println("\nОтсортированный список по высоте:");//
+        for (int i = 0; i < countr.length; i++) {
+            System.out.println("" + countr[i].name + "\t" + countr[i].cord + "\t" + countr[i].square
+                    + "м");
+        }
+        System.out.println("Type searchName");
+        String nameSearch = sc.nextLine();
+        int nomS = -1;
+        for (int i = 0; i < countr.length; i++) {
+            if(countr[i].name.equals(nameSearch)){
+                nomS = i;
+            }
+        }
+
+        if (nomS!=-1){
+            System.out.println("Введите индекс поля");
+            System.out.println("name, coord, square");
+            String strPole = sc.nextLine();
+            switch (strPole) {
+                case "name": {
+                    System.out.println("Введите новое имя");
+                    String newName = sc.nextLine();
+                    countr[nomS].name = newName;
+                    break;
+                }
+                case "coord": {
+                    System.out.println("Введите новое место");
+                    String newCord = sc.nextLine();
+                    countr[nomS].cord = newCord;
+                    break;
+                }
+                case "square": {
+                    System.out.println("Введите новую высоту");
+                    double newSquare = sc.nextDouble();
+                    countr[nomS].square = newSquare;
+                    break;
+
+                }
+                default: {
+                    System.out.println("Поля с таким индексом нет");
+                }
+            }
+            System.out.println("Отредоктированный вариант");
+            System.out.println("" + countr[nomS].name + "\t" + countr[nomS].cord + "\t" + countr[nomS].square
+                    + "м");
+
+        }
+else {
+    System.out.println("Ничего не найдена");
+        }
+
+        }
+
+            }
+
+
+
